@@ -1,6 +1,6 @@
 import falcon
 from waitress import serve
-from user_info.user_resource import UserResource
+from user_info.main.user_resource import UserResource
 
 
 

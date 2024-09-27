@@ -1,7 +1,7 @@
 import falcon
 import json
-from user_info.database import db
-from user_info.model import User
+from user_info.main.database import db
+from user_info.main.model import User
 
 
 class UserResource:

@@ -4,7 +4,7 @@ import pytest
 import mongomock
 from falcon import testing
 from unittest.mock import patch
-from user_info.user_resource import UserResource
+from user_info.main.user_resource import UserResource
 
 
 @pytest.fixture
