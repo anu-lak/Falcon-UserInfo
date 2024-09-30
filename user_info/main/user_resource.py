@@ -5,8 +5,9 @@ from user_info.main.model import User
 
 
 class UserResource:
-    def __init__(self):
-        self.collection = db['users']
+    def __init__(self,collection):
+        # self.collection = db['users']
+        self.collection = collection
 
     def on_get(self,req,resp,email):
         try:
