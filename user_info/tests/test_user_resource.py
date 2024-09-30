@@ -74,7 +74,7 @@ def test_on_post_invalid_email(mock_db, client):
 
     user_data = {
         'name': 'Anu M',
-        'email': 'anuexample.com',  # Invalid email (no @)
+        'email': 'anuexample.com',
         'age': 30
     }
 
