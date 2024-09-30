@@ -5,9 +5,15 @@ from user_info.main.model import User
 
 
 class UserResource:
-    def __init__(self,collection):
-        # self.collection = db['users']
-        self.collection = collection
+    # def __init__(self,collection):
+    #     # self.collection = db['users']
+    #     self.collection = collection
+    def __init__(self, collection=None):
+        if collection is None:
+            # default to a specific collection or data source
+            self.collection = db['users']
+        else:
+            self.collection = collection
 
     def on_get(self,req,resp,email):
         try:
