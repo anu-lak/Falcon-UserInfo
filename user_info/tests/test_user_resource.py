@@ -79,6 +79,42 @@ def test_on_post_invalid_age(mock_db, client):
     assert response.status == '400 Bad Request'
     assert json.loads(response.content) == {'error': 'Age must be an integer'}
 
+@patch('user_info.main.database.db')
+def test_on_post_negative_age_(mock_db, client):
+
+    user_data = {
+        'name': 'Anu M',
+        'email': 'anue@xample.com',
+        'age': -34
+    }
+
+    response = client.simulate_post('/users', json=user_data)
+
+    assert response.status == '400 Bad Request'
+    assert json.loads(response.content) == {'error': 'Age cannot be below 0'}
+
+@patch('user_info.main.database.db')
+def test_on_post_existing_email(mock_db, client):
+    existing_user = {
+        'name': 'Existing User',
+        'email': 'anu@example.com',
+        'age': 25
+    }
+
+    # Inserting the pre-existing user into the mock database
+    client.app._router._roots[0].resource.collection.insert_one(existing_user)
+
+    # Trying to insert a new user with the same email
+    new_user_data = {
+        'name': 'Anu M',
+        'email': 'anu@example.com',
+        'age': 30
+    }
+
+    response = client.simulate_post('/users', json=new_user_data)
+    assert response.status == '400 Bad Request'
+    assert json.loads(response.content) == {'error': 'Email already exists'}
+
 
 
 # GET tests
